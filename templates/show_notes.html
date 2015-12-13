@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+<div>
+  <select>
+    {% for topic in topics %}
+    <option>{{ topic }}</option>
+      {% endfor %}
+    <option value="addTopic">-- Add Topic --</option>
+
+  </select>
+</div>
+
+{% endblock %}
