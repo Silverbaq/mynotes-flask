@@ -1,13 +1,46 @@
 {% extends "layout.html" %}
 {% block body %}
 <div>
-  <select>
-    {% for topic in topics %}
-    <option>{{ topic }}</option>
-      {% endfor %}
-    <option value="addTopic">-- Add Topic --</option>
+    <div>
+        <form action="{{ url_for('show_notes') }}" method="POST">
+            <dt>Topic:</dt>
+            <select name="topic">
+                <option></option>
+                {% for topic in topics %}
+                <option value="{{ topic.id }}">{{ topic.title }}</option>
+                {% endfor %}
+                <input value="Select" type="submit"/>
+            </select>
+        </form>
+    </div>
 
-  </select>
+    <div>
+        <form action="{{ url_for('show_notes') }}" method="POST">
+            <dt>Subject:</dt>
+            <select name="subject">
+                <option></option>
+                {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.title }}</option>
+                {% endfor %}
+                <input value="Select" type="submit"/>
+            </select>
+        </form>
+    </div>
+
+    <div>
+        <form action="{{ url_for('show_notes') }}" method="POST">
+            <dt>Subject:</dt>
+            <select name="subject">
+                <option></option>
+                {% for n in notes %}
+                <option value="{{ n.id }}">{{ n.title }}</option>
+                {% endfor %}
+                <input value="Select" type="submit"/>
+            </select>
+        </form>
+    </div>
+
 </div>
+
 
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<select name="FavWebSite" size="10">
+    {% for topic in topics %}
+    <option value="{{ topic.id }}">{{ topic.title }}</option>
+    {% endfor %}
+</select>
+
+<div>
+    <form action="{{ url_for('add_topic') }}" method=post>
+    <dl>
+      <dt>Topic:
+      <dd><input type=topic name=topic>
+      <dd><input type=submit value=add>
+    </dl>
+  </form>
+</div>
+
+
+{% endblock %}
