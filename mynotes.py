@@ -55,17 +55,18 @@ def add_topic():
 @app.route('/select_subject', methods=['GET', 'POST'])
 def select_subject():
     topicid = request.args.get('id')
-    cur = g.db.execute('select Id, Title from Subject where (?)', topicid)
+    cur = g.db.execute('select Id, Title, TopicId from Subject where TopicId = (?)', topicid)
     subjects = [dict(id = row[0], title = row[1]) for row in cur.fetchall()]
-    return render_template('select_subject.html', subjects=subjects)
+    return render_template('select_subject.html', subjects=subjects, topicId=topicid )
 
 
 @app.route('/addSubject', methods=['GET','POST'])
 def add_subject():
     try:
         sub = request.form['subject']
-        g.db.execute('insert into Subject (Title) values (?)',
-                     [sub])
+        id = request.form['topicId']
+        g.db.execute('insert into Subject (Title, TopicId) values (?, ?)',
+                     [sub, id])
         g.db.commit()
         flash('New subject was successfully added')
     except Exception as e:

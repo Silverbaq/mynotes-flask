@@ -4,6 +4,7 @@
     <form action="{{ url_for('add_subject') }}" method=post>
 
       <label>Subject:</label>
+      <input type="hidden" name="topicId" value="{{ topicId }}"/>
       <input type=subject name=subject>
       <input type=submit value=add>
 
