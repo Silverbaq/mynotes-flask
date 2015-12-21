@@ -30,7 +30,6 @@ def teardown_request(exception):
     if db is not None:
         db.close()
 
-## Topic
 @app.route('/', methods=['GET', 'POST'])
 def index():
     cur = g.db.execute('select Id, Title from Topic order by id desc')
@@ -38,39 +37,14 @@ def index():
     return render_template('select_topic.html', topics=topics)
 
 
-@app.route('/addTopic', methods=['GET','POST'])
-def add_topic():
-    try:
-        top = request.form['topic']
-        g.db.execute('insert into Topic (Title) values (?)',
-                     [top])
-        g.db.commit()
-        flash('New topic was successfully added')
-    except Exception as e:
-        flash(e.message)
-    return redirect(url_for('index'))
-
-
-## Subject
 @app.route('/select_subject', methods=['GET', 'POST'])
 def select_subject():
-    topicid = request.args.get('id')
-    cur = g.db.execute('select Id, Title from Subject where (?)', topicid)
+    topicid = request.args.get['id']
+    cur = g.db.execute('select Id, Title from Subject where TopicId = (?)', topicid)
     subjects = [dict(id = row[0], title = row[1]) for row in cur.fetchall()]
-    return render_template('select_subject.html', subjects=subjects)
+    return render_template('select_topic.html', subjects=subjects)
 
 
-@app.route('/addSubject', methods=['GET','POST'])
-def add_subject():
-    try:
-        sub = request.form['subject']
-        g.db.execute('insert into Subject (Title) values (?)',
-                     [sub])
-        g.db.commit()
-        flash('New subject was successfully added')
-    except Exception as e:
-        flash(e.message)
-    return redirect(url_for('index'))
 
 
 ### TEMP
@@ -104,6 +78,17 @@ def selected_topic():
 
 
 
+@app.route('/addTopic', methods=['GET','POST'])
+def add_topic():
+    try:
+        top = request.form['topic']
+        g.db.execute('insert into Topic (Title) values (?)',
+                     [top])
+        g.db.commit()
+        flash('New topic was successfully added')
+    except Exception as e:
+        flash(e.message)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
