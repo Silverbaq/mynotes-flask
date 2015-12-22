@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<div>
+    <form action="{{ url_for('add_note') }}" method=post>
+        <div>
+            <label>Title:</label>
+        </div>
+        <div>
+            <input type="hidden" name="subjectId" value="{{ subjectId }}"/>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label>Note:</label>
+        </div>
+        <div>
+        <textarea name="value" rows="4" cols="50"></textarea>
+</div>
+        <div>
+            <input type=submit value=add>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

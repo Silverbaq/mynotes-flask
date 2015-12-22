@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<a href="./addnote?id={{subjectId}}">Add new note</a>
+
+<p/>
+
+<div>
+      <select name="list" id="noteList" size="10">
+      	{% for n in notes %}
+    		<option value="{{ n.id }}">{{ n.title }}</option>
+    	{% endfor %}
+      </select>
+  
+	<button value="" onclick="selectSubject()">Select</button>
+	<button value="" onclick="editSubject()">Edit</button>
+  	<button value="" onclick="deleteSubject()">Delete</button>
+  
+</div>
+
+{% endblock %}

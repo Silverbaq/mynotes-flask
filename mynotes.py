@@ -73,6 +73,37 @@ def add_subject():
         flash(e.message)
     return redirect(url_for('index'))
 
+## Notes
+@app.route('/selectnote', methods=['GET', 'POST'])
+def select_note():
+    subjectId = request.args.get('id')
+    cur = g.db.execute('select Id, Title, SubjectId, Value from Note where SubjectId = (?)', subjectId)
+    notes = [dict(id = row[0], title = row[1]) for row in cur.fetchall()]
+    return render_template('select_note.html', notes=notes, subjectId=subjectId)
+
+
+@app.route('/addnote', methods=['GET', 'POST'])
+def add_note():
+    if request.method == 'POST':
+        try:
+            subjectId = request.form['subjectId']
+            title = request.form['title']
+            value = request.form['value']
+
+            cur = g.db.execute('insert into Note (Title, SubjectId, Value) values (?, ?, ?)',
+                         [title, subjectId, value])
+            g.db.commit()
+            flash('New subject was successfully added')
+        except Exception as e:
+            flash(e.message)
+        return redirect(url_for('select_note',id=subjectId))
+    else:
+        subjectId = request.args.get('id')
+        return render_template('add_note.html', subjectId=subjectId)
+
+
+
+
 
 ### TEMP
 @app.route('/test', methods = ['GET', 'POST'])
