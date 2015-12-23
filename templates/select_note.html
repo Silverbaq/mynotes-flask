@@ -8,14 +8,20 @@
 <div>
       <select name="list" id="noteList" size="10">
       	{% for n in notes %}
-    		<option value="{{ n.id }}">{{ n.title }}</option>
+    		<option value="{{ n.id }}" onclick="showNote({{ n.id }});">{{ n.title }}</option>
     	{% endfor %}
       </select>
-  
+
+		<textarea id="txtNote" rows="11"></textarea>
+	<div>
+
 	<button value="" onclick="selectSubject()">Select</button>
 	<button value="" onclick="editSubject()">Edit</button>
   	<button value="" onclick="deleteSubject()">Delete</button>
-  
+
+
+	</div>
+
 </div>
 
 {% endblock %}

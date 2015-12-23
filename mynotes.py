@@ -1,7 +1,7 @@
 # all the imports
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     abort, render_template, flash, jsonify
 
 
 # configuration
@@ -102,6 +102,13 @@ def add_note():
         return render_template('add_note.html', subjectId=subjectId)
 
 
+## Service calls
+@app.route('/getNote')
+def get_note():
+    id = request.args.get('id')
+    cur = g.db.execute('select Id, Title, SubjectId, Value from Note where Id = (?)', id)
+    note = [dict(id = row[0], title = row[1], value = row[3]) for row in cur.fetchall()]
+    return jsonify(note=note);
 
 
 
