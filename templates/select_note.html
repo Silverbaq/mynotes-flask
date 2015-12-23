@@ -2,7 +2,7 @@
 {% block body %}
 
 <a href="./addnote?id={{subjectId}}">Add new note</a>
-
+<input type="hidden" id="subjectId" value="{{subjectId}}" />
 <p/>
 
 <div>
@@ -15,9 +15,9 @@
 		<textarea id="txtNote" rows="11"></textarea>
 	<div>
 
-	<button value="" onclick="selectSubject()">Select</button>
-	<button value="" onclick="editSubject()">Edit</button>
-  	<button value="" onclick="deleteSubject()">Delete</button>
+	<button value="" onclick="">Select</button>
+	<button value="" onclick="">Edit</button>
+  <button value="" onclick="deleteNote()">Delete</button>
 
 
 	</div>

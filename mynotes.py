@@ -101,6 +101,21 @@ def add_note():
         subjectId = request.args.get('id')
         return render_template('add_note.html', subjectId=subjectId)
 
+@app.route('/deleteNote', methods=['GET'])
+def delete_note():
+    try:
+        id = request.args.get('id')
+        subjectId = request.args.get('subjectId')
+        cur = g.db.execute('delete from Note where id = (?)',
+        [id])
+        g.db.commit()
+        flash('Note has been successfully deleted')
+    except Exception as e:
+        flash(e.message)
+
+    cur = g.db.execute('select Id, Title, SubjectId, Value from Note where SubjectId = (?)', subjectId)
+    notes = [dict(id = row[0], title = row[1]) for row in cur.fetchall()]
+    return render_template('select_note.html', notes=notes, subjectId=subjectId)
 
 ## Service calls
 @app.route('/getNote')

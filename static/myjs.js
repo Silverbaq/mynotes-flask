@@ -20,6 +20,13 @@ function showNote(id) {
     e.innerHTML = note;
 }
 
+function deleteNote() {
+  var e = document.getElementById("noteList");
+  var id = e.options[e.selectedIndex].value;
+  var subjectId = document.getElementById("subjectId").value;
+
+   window.location = './deleteNote?id='+id+'&subjectId='+subjectId;
+}
 
 
 function Get(yourUrl){
