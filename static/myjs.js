@@ -4,6 +4,8 @@ function selectTopic() {
   window.location = './select_subject?id='+id;
 }
 
+
+
 function selectSubject() {
   var e = document.getElementById("subjectList");
   var id = e.options[e.selectedIndex].value;
@@ -13,9 +15,7 @@ function selectSubject() {
 
 function showNote(id) {
     var json_obj = JSON.parse(Get("./getNote?id="+id));
-
     var note = json_obj.note[0].value;
-
     var e = document.getElementById("txtNote");
     e.innerHTML = note;
 }
