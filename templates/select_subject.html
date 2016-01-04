@@ -13,16 +13,18 @@
 <p/>
 
 <div>
+    <button value="" onclick="selectSubject()">Select</button>
+	<button value="" onclick="editSubject()">Edit</button>
+  	<button value="" onclick="deleteSubject()">Delete</button>
+</div>
+<p/>
+
+<div>
       <select name="list" id="subjectList" size="10">
       	{% for s in subjects %}
     		<option value="{{ s.id }}">{{ s.title }}</option>
     	{% endfor %}
       </select>
-  
-	<button value="" onclick="selectSubject()">Select</button>
-	<button value="" onclick="editSubject()">Edit</button>
-  	<button value="" onclick="deleteSubject()">Delete</button>
-  
 </div>
 
 {% endblock %}

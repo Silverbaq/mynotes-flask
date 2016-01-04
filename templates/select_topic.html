@@ -12,22 +12,20 @@
   </form>
 </div>
 <p/>
-<table>
-  <tr>
-    <td>
+
+<div>
+  <button value="" onclick="selectTopic()">Select</button>
+	<button value="">Edit</button>
+  	<button value="">Delete</button>
+</div>
+<p/>
+<div>
       <select name="list" id="topicList" size="10">
       	{% for topic in topics %}
     		<option value="{{ topic.id }}">{{ topic.title }}</option>
     	{% endfor %}
       </select>
-</td>
-<td>
-	<button value="" onclick="selectTopic()">Select</button>
-	<button value="">Edit</button>
-  	<button value="">Delete</button>
-</td>
-  </tr>
-</table>
+</div>
 
 
 {% endblock %}

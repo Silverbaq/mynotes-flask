@@ -6,22 +6,26 @@
 <p/>
 
 <div>
+	<button value="" onclick="">Select</button>
+	<button value="" onclick="">Edit</button>
+    <button value="" onclick="deleteNote()">Delete</button>
+</div>
+
+<div id="wrapper">
+
+<div id="left">
+
       <select name="list" id="noteList" size="10">
       	{% for n in notes %}
     		<option value="{{ n.id }}" onclick="showNote({{ n.id }});">{{ n.title }}</option>
     	{% endfor %}
       </select>
 
-		<textarea id="txtNote" rows="11"></textarea>
-	<div>
-
-	<button value="" onclick="">Select</button>
-	<button value="" onclick="">Edit</button>
-  <button value="" onclick="deleteNote()">Delete</button>
-
-
-	</div>
-
 </div>
 
+<div id="right">
+	<textarea id="txtNote" class="note-display" rows="11"></textarea>
+</div>
+
+</div>
 {% endblock %}
